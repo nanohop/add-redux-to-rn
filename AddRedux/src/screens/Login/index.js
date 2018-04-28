@@ -25,8 +25,8 @@ export default class Login extends Component {
 
   render() {
     return (
-      <ScrollView style={{ flex: 1 }}>
-        <View style={styles.container}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
+        <ScrollView style={styles.container}>
           <Text style={styles.header}>Shape Gallery</Text>
 
           <Image 
@@ -60,8 +60,8 @@ export default class Login extends Component {
           >
             <Text style={styles.loginText}>Login</Text>
           </TouchableOpacity>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     )
   }
 
@@ -70,8 +70,7 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
-    paddingBottom: 300
+    marginTop: 20
   },
   header: {
     fontSize: 24,
