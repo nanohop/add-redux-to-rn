@@ -10,9 +10,13 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
+import { connect } from 'react-redux'
+
+import { onLogin } from '../../actions/auth'
+
 import Circle from 'images/shapes/circle.png'
 
-export default class Login extends Component {
+class Login extends Component {
 
   state = {
     username: '',
@@ -66,6 +70,8 @@ export default class Login extends Component {
   }
 
 }
+
+export default connect(undefined, { onLogin })(Login)
 
 const styles = StyleSheet.create({
   container: {

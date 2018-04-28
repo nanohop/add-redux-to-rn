@@ -6,24 +6,38 @@ import {
 
 console.disableYellowBox = true;
 
+import { createStore } from 'redux'
+import { Provider, connect } from 'react-redux'
+
 import Gallery from './src/screens/Gallery'
 import Login from './src/screens/Login'
 
-export default class App extends Component {
+import rootReducer from './src/reducers'
 
-  state = {
-    username: null
-  }
+const store = createStore(rootReducer)
 
-  onLogin = (username) => {
-    this.setState({ username })
-  }
+class LoginGate extends Component{
 
   render() {
+    if(this.props.username) {
+      return <Gallery />
+    } else {
+      return <Login />
+    }
+  }
+
+}
+
+const ConnectedLoginGate = connect(state => ({
+  username: state.auth.username
+}))(LoginGate)
+
+export default class App extends Component {
+  render() {
     return (
-      <View style={styles.container}>
-        {this.state.username ? <Gallery /> : <Login onLogin={this.onLogin} />}
-      </View>
+      <Provider store={store}>
+        <ConnectedLoginGate />
+      </Provider>
     );
   }
 }
